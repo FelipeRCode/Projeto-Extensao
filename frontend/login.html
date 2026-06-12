@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<meta name="theme-color" content="#2d6a40">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Essenza Prime">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Essenza Prime — Login</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    background: #0d1a12;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', system-ui, sans-serif;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .blob1 {
+    width: 700px; height: 700px;
+    background: radial-gradient(circle at 40% 60%, #2d6a4055, #1b4332aa);
+    border-radius: 62% 38% 46% 54% / 60% 44% 56% 40%;
+    top: -200px; left: -180px;
+    animation: morph1 10s ease-in-out infinite;
+  }
+  .blob2 {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle at 60% 40%, #40916c44, #1b433233);
+    border-radius: 40% 60% 70% 30% / 50% 30% 70% 50%;
+    bottom: -180px; right: -150px;
+    animation: morph2 12s ease-in-out infinite;
+  }
+  .blob3 {
+    width: 420px; height: 420px;
+    background: radial-gradient(circle at 50% 50%, #52b78833, #2d6a4022);
+    border-radius: 55% 45% 35% 65% / 45% 65% 35% 55%;
+    bottom: -60px; left: 200px;
+    animation: morph3 14s ease-in-out infinite;
+  }
+
+  @keyframes morph1 {
+    0%,100% { border-radius: 62% 38% 46% 54% / 60% 44% 56% 40%; transform: translate(0,0); }
+    50%      { border-radius: 40% 60% 55% 45% / 50% 60% 40% 50%; transform: translate(20px, 15px); }
+  }
+  @keyframes morph2 {
+    0%,100% { border-radius: 40% 60% 70% 30% / 50% 30% 70% 50%; transform: translate(0,0); }
+    50%      { border-radius: 60% 40% 30% 70% / 40% 70% 30% 60%; transform: translate(-15px, -20px); }
+  }
+  @keyframes morph3 {
+    0%,100% { border-radius: 55% 45% 35% 65% / 45% 65% 35% 55%; transform: translate(0,0); }
+    50%      { border-radius: 35% 65% 55% 45% / 65% 35% 65% 35%; transform: translate(10px, -10px); }
+  }
+
+  .wrapper {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+    max-width: 420px;
+    padding: 0 24px;
+  }
+
+  .logo-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeDown 0.7s ease both;
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .logo-img {
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 20px #40916c55);
+  }
+
+  .card {
+    width: 100%;
+    background: rgba(35, 50, 40, 0.85);
+    border: 1px solid rgba(116, 198, 157, 0.35);
+    border-radius: 20px;
+    padding: 40px 36px 36px;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow:
+      0 24px 60px rgba(0,0,0,0.6),
+      0 0 0 1px rgba(64,145,108,0.08) inset,
+      0 1px 0 rgba(82,183,136,0.12) inset;
+    animation: fadeUp 0.7s ease 0.15s both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .card h1 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #d8f3dc;
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    font-weight: 400;
+    color: #52b788;
+    margin-bottom: 28px;
+  }
+
+  .field-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #74c69d;
+    margin-bottom: 8px;
+  }
+
+  .input-wrap {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .input-wrap input {
+    width: 100%;
+    padding: 13px 44px 13px 42px;
+    background: rgba(216, 243, 220, 0.12);
+    border: 1px solid rgba(116, 198, 157, 0.35);
+    border-radius: 10px;
+    color: #d8f3dc;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    outline: none;
+    transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
+  }
+
+  .input-wrap input::placeholder { color: #95d5b2; }
+
+  .input-wrap input:focus {
+    border-color: #74c69d;
+    background: rgba(216, 243, 220, 0.18);
+    box-shadow: 0 0 0 3px rgba(64,145,108,0.14);
+  }
+
+  .icon-left {
+    position: absolute;
+    left: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #40916c;
+    font-size: 17px;
+    pointer-events: none;
+  }
+
+  .toggle-pw {
+    position: absolute;
+    right: 11px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #40916c;
+    cursor: pointer;
+    font-size: 17px;
+    padding: 4px;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+  .toggle-pw:hover { color: #74c69d; }
+
+  .btn-login {
+    width: 100%;
+    padding: 14px;
+    margin-top: 8px;
+    background: linear-gradient(135deg, #2d6a40, #40916c);
+    border: none;
+    border-radius: 10px;
+    color: #d8f3dc;
+    font-family: 'Inter';
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 4px 18px rgba(64,145,108,0.28);
+  }
+
+  .btn-login:hover {
+    background: linear-gradient(135deg, #40916c, #52b788);
+    transform: translateY(-1px);
+    box-shadow: 0 7px 24px rgba(64,145,108,0.4);
+  }
+
+  .btn-login:active { transform: translateY(0); }
+
+  .keep-connected {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .keep-connected input[type="checkbox"] { display: none; }
+
+  .toggle-track {
+    width: 36px;
+    height: 20px;
+    background: rgba(216, 243, 220, 0.15);
+    border: 1px solid rgba(116, 198, 157, 0.35);
+    border-radius: 20px;
+    position: relative;
+    transition: background 0.25s, border-color 0.25s;
+    flex-shrink: 0;
+  }
+
+  .toggle-thumb {
+    width: 14px;
+    height: 14px;
+    background: #52b788;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.25s, background 0.25s;
+  }
+
+  .keep-connected input:checked ~ .toggle-track {
+    background: rgba(64, 145, 108, 0.35);
+    border-color: #74c69d;
+  }
+
+  .keep-connected input:checked ~ .toggle-track .toggle-thumb {
+    transform: translateX(16px);
+    background: #74c69d;
+  }
+
+  .keep-label {
+    font-size: 12px;
+    color: #74c69d;
+    font-weight: 400;
+  }
+
+  .forgot {
+    display: block;
+    text-align: center;
+    margin-top: 18px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #40916c;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .forgot:hover { color: #74c69d; }
+
+  .error-msg {
+    color: #ff6b6b;
+    font-size: 12px;
+    margin-bottom: 15px;
+    text-align: center;
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+
+  <div class="wrapper">
+    <div class="logo-area">
+      <img class="logo-img" src="assets/logo.png">
+    </div>
+
+    <div class="card">
+      <h1>Bem-vindo(a)</h1>
+      <p class="subtitle">Acesse sua conta para continuar</p>
+
+      <div id="error-box" class="error-msg">E-mail ou senha incorretos.</div>
+
+      <label class="field-label" for="email">E-mail</label>
+      <div class="input-wrap">
+        <i class="ti ti-mail icon-left"></i>
+        <input type="email" id="email" placeholder="seu@email.com">
+      </div>
+
+      <label class="field-label" for="senha">Senha</label>
+      <div class="input-wrap">
+        <i class="ti ti-lock icon-left"></i>
+        <input type="password" id="senha" placeholder="••••••••">
+        <button class="toggle-pw" onclick="toggleSenha()" aria-label="Mostrar senha">
+          <i class="ti ti-eye" id="eye-icon"></i>
+        </button>
+      </div>
+
+      <label class="keep-connected">
+        <input type="checkbox" id="manter-conectado">
+        <div class="toggle-track"><div class="toggle-thumb"></div></div>
+        <span class="keep-label">Manter conectado</span>
+      </label>
+
+      <button class="btn-login" onclick="realizarLogin()">Entrar</button>
+      <a class="forgot" href="esqueci-senha.html">Esqueci minha senha</a>
+    </div>
+  </div>
+
+<script>
+  function toggleSenha() {
+    const input = document.getElementById('senha');
+    const icon = document.getElementById('eye-icon');
+    if (input.type === 'password') {
+      input.type = 'text';
+      icon.className = 'ti ti-eye-off';
+    } else {
+      input.type = 'password';
+      icon.className = 'ti ti-eye';
+    }
+  }
+
+  async function realizarLogin() {
+    const email = document.getElementById('email').value.trim();
+    const senha = document.getElementById('senha').value;
+    const errorBox = document.getElementById('error-box');
+    const btn = document.querySelector('.btn-login');
+
+    errorBox.style.display = 'none';
+
+    if (!email || !senha) {
+      errorBox.style.display = 'block';
+      errorBox.textContent = 'Preencha o e-mail e a senha.';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Aguarde...';
+
+    try {
+      const response = await fetch('http://localhost:8080/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, senha })
+      });
+
+      const data = await response.json();
+
+      if (data.sucesso) {
+        const manter = document.getElementById('manter-conectado').checked;
+        const storage = manter ? localStorage : sessionStorage;
+        storage.setItem('essenza_logged', 'true');
+        storage.setItem('essenza_usuario', data.nome || email);
+        storage.setItem('essenza_nivel', data.nivelAcesso || 'FUNCIONARIO');
+        storage.setItem('essenza_id', String(data.id || ''));
+        window.location.href = 'index.html';
+      } else {
+        errorBox.style.display = 'block';
+        errorBox.textContent = data.mensagem || 'E-mail ou senha incorretos.';
+      }
+    } catch (e) {
+      errorBox.style.display = 'block';
+      errorBox.textContent = 'Não foi possível conectar ao servidor.';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Entrar';
+    }
+  }
+
+  // Verificar se já está logado (localStorage = manter, sessionStorage = sessão)
+  if (localStorage.getItem('essenza_logged') === 'true' ||
+      sessionStorage.getItem('essenza_logged') === 'true') {
+    window.location.href = 'index.html';
+  }
+
+  // Permitir login com Enter
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') realizarLogin();
+  });
+</script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    });
+  }
+</script>
+</body>
+</html>
